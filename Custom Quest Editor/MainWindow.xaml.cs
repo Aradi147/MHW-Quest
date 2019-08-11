@@ -246,17 +246,17 @@ namespace Custom_Quest_Editor
             for (int i = 0; i < HRRqlst.Length; i++)
                 HRReq.Items.Add(HRRqlst[i]);
             for (int i = 0; i < 3; i++)
-                BGM.Items.Add("Defualt");
+                BGM.Items.Add("Default");
             BGM.Items.Add("None/Khezu Theme?");
             BGM.Items.Add("Extreme Behemoth?");
             for (int i = 5; i < 21; i++)
-                BGM.Items.Add("Defualt?");
+                BGM.Items.Add("Default?");
             BGM.Items.Add("A Rush of Blood/MM music");
             for (int i = 22; i < 24; i++)
-                BGM.Items.Add("Defualt? ");
+                BGM.Items.Add("Default? ");
             BGM.Items.Add("Code:Red/DMC Music");
             for (int i = 25; i < 99; i++)
-                BGM.Items.Add("Defualt?");
+                BGM.Items.Add("Default?");
             for (int i = 0; i < MonIcons.Length; i++)
                 for (int j = 0; j < IconList.Length; j++)
                     MonIcons[i].Items.Add(IconList[j]);
@@ -375,10 +375,7 @@ namespace Custom_Quest_Editor
             if (data2[84] == 04)
                 MObj1MM.IsChecked = true;
             else MObj1MM.IsChecked = false;
-            RV = BitConverter.ToUInt16(new byte[] { data2[87], data2[88] }, 0);
-            if (RV == 127)
-                MObjID1.SelectedIndex = 0;
-            else MObjID1.SelectedIndex = RV + 1;
+            MObjID1.SelectedIndex = BitConverter.ToUInt16(new byte[] { data2[87], data2[88] }, 0);
             MObjC1.Text = BitConverter.ToUInt16(new byte[] { data2[89], data2[90] }, 0).ToString();
             for (int i = 0; i < ObjectiveIDs.Length; i++)
                 if (data2[91] == ObjectiveIDs[i])
@@ -386,10 +383,7 @@ namespace Custom_Quest_Editor
             if (data2[92] == 04)
                 MObj2MM.IsChecked = true;
             else MObj2MM.IsChecked = false;
-            RV = BitConverter.ToUInt16(new byte[] { data2[95], data2[96] }, 0);
-            if (RV == 127)
-                MObjID2.SelectedIndex = 0;
-            else MObjID2.SelectedIndex = RV + 1;
+            MObjID2.SelectedIndex = BitConverter.ToUInt16(new byte[] { data2[95], data2[96] }, 0);
             MObjC2.Text = BitConverter.ToUInt16(new byte[] { data2[97], data2[98] }, 0).ToString();
             if (data2[99] == 1)
                 MultiO.IsChecked = false;
@@ -581,17 +575,9 @@ namespace Custom_Quest_Editor
             if (MObj1MM.IsChecked == true)
                 data3[84] = 04;
             else data3[84] = 0;
-            if (MObjID1.SelectedIndex == 0)
-            {
-                data3[87] = 127;
-                data3[88] = 0;
-            }
-            else
-            {
-                buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID1.SelectedIndex));
-                data3[87] = buffer[0];
-                data3[88] = buffer[1];
-            }
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID1.SelectedIndex));
+            data3[87] = buffer[0];
+            data3[88] = buffer[1];
             buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjC1.Text));
             data3[89] = buffer[0];
             data3[90] = buffer[1];
@@ -606,17 +592,9 @@ namespace Custom_Quest_Editor
             if (MObj2MM.IsChecked == true)
                 data3[92] = 04;
             else data3[92] = 0;
-            if (MObjID2.SelectedIndex == 0)
-            {
-                data3[95] = 127;
-                data3[96] = 0;
-            }
-            else
-            {
-                buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID2.SelectedIndex));
-                data3[95] = buffer[0];
-                data3[96] = buffer[1];
-            }
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID2.SelectedIndex));
+            data3[95] = buffer[0];
+            data3[96] = buffer[1];
             buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjC2.Text));
             data3[97] = buffer[0];
             data3[98] = buffer[1];
@@ -938,17 +916,9 @@ namespace Custom_Quest_Editor
             if (MObj1MM.IsChecked == true)
                 data3[84] = 04;
             else data3[84] = 0;
-            if (MObjID1.SelectedIndex == 0)
-            {
-                data3[87] = 127;
-                data3[88] = 0;
-            }
-            else
-            {
-                buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID1.SelectedIndex));
-                data3[87] = buffer[0];
-                data3[88] = buffer[1];
-            }
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID1.SelectedIndex));
+            data3[87] = buffer[0];
+            data3[88] = buffer[1];
             buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjC1.Text));
             data3[89] = buffer[0];
             data3[90] = buffer[1];
@@ -963,17 +933,9 @@ namespace Custom_Quest_Editor
             if (MObj2MM.IsChecked == true)
                 data3[92] = 04;
             else data3[92] = 0;
-            if (MObjID2.SelectedIndex == 0)
-            {
-                data3[95] = 127;
-                data3[96] = 0;
-            }
-            else
-            {
-                buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID2.SelectedIndex));
-                data3[95] = buffer[0];
-                data3[96] = buffer[1];
-            }
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjID2.SelectedIndex));
+            data3[95] = buffer[0];
+            data3[96] = buffer[1];
             buffer = BitConverter.GetBytes(Convert.ToUInt16(MObjC2.Text));
             data3[97] = buffer[0];
             data3[98] = buffer[1];
@@ -1202,7 +1164,7 @@ namespace Custom_Quest_Editor
                 sfd.FileName = "questData_00" + QID.Text + ".mib";
             else if (QID.Text.Length == 4)
                 sfd.FileName = "questData_0" + QID.Text + ".mib";
-            else if (QID.Text.Length == 5)
+            else if (QID.Text.Length > 4)
                 sfd.FileName = "questData_" + QID.Text + ".mib";
             sfd.ShowDialog();
             if (sfd.FileName != "")
@@ -1225,8 +1187,9 @@ namespace Custom_Quest_Editor
                 for (int i = 0; i < Items.Length; i++)
                     MObjID1.Items.Add(Items[i]);
             else
-                for (int i =0; i<MonsterNames.Length;i++)
+                for (int i = 1; i < MonsterNames.Length; i++)
                     MObjID1.Items.Add(MonsterNames[i]);
+            MObjID1.SelectedIndex = 0;
         }
         private void MObjT2_Changed(object sender, RoutedEventArgs e)
         {
@@ -1236,8 +1199,9 @@ namespace Custom_Quest_Editor
                 for (int i = 0; i < Items.Length; i++)
                     MObjID2.Items.Add(Items[i]);
             else
-                for (int i = 0; i < MonsterNames.Length; i++)
+                for (int i = 1; i < MonsterNames.Length; i++)
                     MObjID2.Items.Add(MonsterNames[i]);
+            MObjID2.SelectedIndex = 0;
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {

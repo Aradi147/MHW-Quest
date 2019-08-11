@@ -71,7 +71,7 @@
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
                                     <Label Content="Quest ID"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="5" Grid.Column="2" Name="QID" Padding="0,5" Margin="0,5"/>
+                                    <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="6" Grid.Column="2" Name="QID" Padding="0,5" Margin="0,5"/>
                                     <Label Grid.Column="4" Content="Stars"/>
                                     <ComboBox Grid.Column="6" Name="Stars" Padding="0,5" Margin="0,5"/>
                                     <Label Grid.Row="1" Grid.Column="0" Content="Rank"/>
