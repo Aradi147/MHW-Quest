@@ -1,0 +1,15 @@
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\bin\Debug\Custom Quest Editor.exe.config
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\bin\Debug\Custom Quest Editor.exe
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\bin\Debug\Custom Quest Editor.pdb
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\MainWindow.g.cs
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\App.g.cs
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor_MarkupCompile.cache
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor_MarkupCompile.lref
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\MainWindow.baml
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor.g.resources
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom_Quest_Editor.Properties.Resources.resources
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor.csproj.GenerateResource.cache
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor.csproj.CoreCompileInputs.cache
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor.exe
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor.pdb
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor.csprojAssemblyReference.cache
