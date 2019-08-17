@@ -201,6 +201,11 @@ namespace Custom_Quest_Editor
         public MainWindow()
         {
             InitializeComponent();
+          //  SpawnHelp.Text = "Help and Spawn Notes (mostly from NekotagaYuhatora's comments on the Template): " +
+          //      "First and foremost, the quest only uses one of the two options, the Sequential Spawn Rules or the Table Spawn Rules depending on Quest Type, which can be found in " +
+          //      "the Common Tab. You can basically ignore the other one or ideally zero all the values in it. The Global Spawn Delay, as the name indicates, is shared between the two. " +
+          //      "The Sequential Spawn Rules options are all self explanatory, even if some are not fully understood or explored. The Table Spawn Rules need a bit more explaining, however. " +
+          //      "The two deciders, for ";
             ComboBox[] MID = { M1ID, M2ID, M3ID, M4ID, M5ID, M6ID, M7ID };
             TextBox[] MSobj = { M1sobjID, M2sobjID, M3sobjID, M4sobjID, M5sobjID, M6sobjID, M7sobjID };
             TextBox[] MonsterSize = { M1Siz, M2Siz, M3Siz, M4Siz, M5Siz, M6Siz, M7Siz };
@@ -302,7 +307,7 @@ namespace Custom_Quest_Editor
             }
             for (int i = 0; i < MapIcons.Length; i++)
                 for (int j = 0; j < 255; j++)
-                    MapIcons[i].Items.Add("Unknown Number " + j.ToString());
+                    MapIcons[i].Items.Add("Unknown #" + j.ToString());
             #endregion
             }
         private void Open_Click(object sender, RoutedEventArgs e)
@@ -341,7 +346,7 @@ namespace Custom_Quest_Editor
                 MapIcon34, MapIcon35, MapIcon36, MapIcon37, MapIcon38, MapIcon39, MapIcon40,
                 MapIcon41, MapIcon42, MapIcon43, MapIcon44, MapIcon45, MapIcon46, MapIcon47,
                 MapIcon48, MapIcon49, MapIcon50, MapIcon51 };
-            TextBox[] SpawnText = { SpawnDelay, M7SpD, M3SpC, M4SpC, M5SpC, M6SpC, M7SpC };
+            TextBox[] SpawnText = { M6SpC, SpawnDelay, M7SpC, M3SpC, M4SpC, M5SpC, M6SpD, M7SpD };
             TextBox[] ArenaText = { RankA, RankB, RankC, FenCD, FenUT };
             #endregion
             data = null;
@@ -351,7 +356,7 @@ namespace Custom_Quest_Editor
             Int32 RV = 0;
             #region Common and Objectives
             QID.Text = BitConverter.ToInt32(new byte[] { data2[6], data2[7], data2[8], data2[9] }, 0).ToString();
-            Stars.SelectedIndex = data2[10] + 1;
+            Stars.SelectedIndex = data2[10];
             Rank.SelectedIndex = data2[19];
             RV = BitConverter.ToInt32(new byte[] { data2[23], data2[24], data2[25], data2[26] }, 0);
             for (int i = 0; i < MapIDs.Length; i++)
@@ -362,7 +367,6 @@ namespace Custom_Quest_Editor
                 FSpawn.IsChecked = false;
             else FSpawn.IsChecked = true;
             Weather.SelectedIndex = data2[43];
-            MPMod.Text = data2[47].ToString();
             Reward.Text = BitConverter.ToUInt32(new byte[] { data2[51], data2[52], data2[53], data2[54] }, 0).ToString();
             Penalty.Text = BitConverter.ToUInt32(new byte[] { data2[55], data2[56], data2[57], data2[58] }, 0).ToString();
             Timer.Text = BitConverter.ToUInt32(new byte[] { data2[63], data2[64], data2[65], data2[66] }, 0).ToString();
@@ -442,17 +446,15 @@ namespace Custom_Quest_Editor
             }
             sMsobj.Text = BitConverter.ToInt32(new byte[] { data2[627], data2[628], data2[629], data2[630] }, 0).ToString();
             sMHP.Text = BitConverter.ToInt32(new byte[] { data2[631], data2[632], data2[633], data2[634] }, 0).ToString();
-            sMu1.Text = BitConverter.ToInt32(new byte[] { data2[635], data2[636], data2[637], data2[638] }, 0).ToString();
-            sMu2.Text = BitConverter.ToInt32(new byte[] { data2[639], data2[640], data2[641], data2[642] }, 0).ToString();
-            sMu3.Text = data2[643].ToString();
-            sMu4.Text = BitConverter.ToInt32(new byte[] { data2[644], data2[645], data2[646], data2[647] }, 0).ToString();
-            sMu5.Text = BitConverter.ToInt32(new byte[] { data2[648], data2[649], data2[650], data2[651] }, 0).ToString();
+            sMAt.Text = BitConverter.ToInt32(new byte[] { data2[635], data2[636], data2[637], data2[638] }, 0).ToString();
+            sMDe.Text = BitConverter.ToInt32(new byte[] { data2[639], data2[640], data2[641], data2[642] }, 0).ToString();
+            MPMod.Text = BitConverter.ToInt32(new byte[] { data2[644], data2[645], data2[646], data2[647] }, 0).ToString();
             #endregion
             #region Spawn, Map Icons, and Arena
             for (int i = 0; i < 5; i++)
                 MSSpw[i].SelectedIndex = data2[652 + 4 * i];
             for (int i=0;i<SpawnText.Length;i++)
-                SpawnText[i].Text= data2[676 + 4 * i].ToString();
+                SpawnText[i].Text= data2[672 + 4 * i].ToString();
             for (int i=0;i<MapIcons.Length;i++)
                 MapIcons[i].SelectedIndex = BitConverter.ToInt32(new byte[] { data2[704 + 4 * i], data2[705 + 4 * i], data2[706 + 4 * i], data2[707 + 4 * i] }, 0);
             for (int i=0;i<5;i++)
@@ -507,7 +509,7 @@ namespace Custom_Quest_Editor
                 MapIcon34, MapIcon35, MapIcon36, MapIcon37, MapIcon38, MapIcon39, MapIcon40,
                 MapIcon41, MapIcon42, MapIcon43, MapIcon44, MapIcon45, MapIcon46, MapIcon47,
                 MapIcon48, MapIcon49, MapIcon50, MapIcon51 };
-            TextBox[] SpawnText = { SpawnDelay, M7SpD, M3SpC, M4SpC, M5SpC, M6SpC, M7SpC };
+            TextBox[] SpawnText = { M6SpC, SpawnDelay, M7SpC, M3SpC, M4SpC, M5SpC, M6SpD, M7SpD };
             TextBox[] ArenaText = { RankA, RankB, RankC, FenCD, FenUT };
             #endregion
             data = (File.ReadAllBytes(ofd.FileName));
@@ -518,7 +520,7 @@ namespace Custom_Quest_Editor
             data3[7] = buffer[1];
             data3[8] = buffer[2];
             data3[9] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToByte(Stars.SelectedIndex+1));
+            buffer = BitConverter.GetBytes(Convert.ToByte(Stars.SelectedIndex));
             data3[10] = buffer[0];
             buffer = BitConverter.GetBytes(Convert.ToByte(Rank.SelectedIndex));
             data3[19] = buffer[0];
@@ -540,7 +542,6 @@ namespace Custom_Quest_Editor
             else data3[31] = 0;
             buffer = BitConverter.GetBytes(Convert.ToByte(Weather.SelectedIndex));
             data3[43] = buffer[0];
-            data3[47] = Convert.ToByte(MPMod.Text);
             buffer = BitConverter.GetBytes(Convert.ToInt32(Reward.Text));
             data3[51] = buffer[0];
             data3[52] = buffer[1];
@@ -726,33 +727,27 @@ namespace Custom_Quest_Editor
             data3[632] = buffer[1];
             data3[633] = buffer[2];
             data3[634] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu1.Text));
+            buffer = BitConverter.GetBytes(Convert.ToInt32(sMAt.Text));
             data3[635] = buffer[0];
             data3[636] = buffer[1];
             data3[637] = buffer[2];
             data3[638] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu2.Text));
+            buffer = BitConverter.GetBytes(Convert.ToInt32(sMDe.Text));
             data3[639] = buffer[0];
             data3[640] = buffer[1];
             data3[641] = buffer[2];
             data3[642] = buffer[3];
-            data3[643] = Convert.ToByte(sMu3.Text);
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu4.Text));
+            buffer = BitConverter.GetBytes(Convert.ToInt32(MPMod.Text));
             data3[644] = buffer[0];
             data3[645] = buffer[1];
             data3[646] = buffer[2];
             data3[647] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu5.Text));
-            data3[648] = buffer[0];
-            data3[649] = buffer[1];
-            data3[650] = buffer[2];
-            data3[651] = buffer[3];
             #endregion
             #region Spawn, Map Icons, and Arena
             for (int i = 0; i < 5; i++)
                 data3[652 + 4 * i] = Convert.ToByte(MSSpw[i].SelectedIndex);
             for (int i = 0; i < SpawnText.Length; i++)
-                data3[676 + 4 * i] = Convert.ToByte(SpawnText[i].Text);
+                data3[672 + 4 * i] = Convert.ToByte(SpawnText[i].Text);
             for (int i = 0; i < MapIcons.Length; i++)
             {
                 buffer = BitConverter.GetBytes(Convert.ToInt32(MapIcons[i].SelectedIndex));
@@ -848,7 +843,7 @@ namespace Custom_Quest_Editor
                 MapIcon34, MapIcon35, MapIcon36, MapIcon37, MapIcon38, MapIcon39, MapIcon40,
                 MapIcon41, MapIcon42, MapIcon43, MapIcon44, MapIcon45, MapIcon46, MapIcon47,
                 MapIcon48, MapIcon49, MapIcon50, MapIcon51 };
-            TextBox[] SpawnText = { SpawnDelay, M7SpD, M3SpC, M4SpC, M5SpC, M6SpC, M7SpC };
+            TextBox[] SpawnText = { M6SpC, SpawnDelay, M7SpC, M3SpC, M4SpC, M5SpC, M6SpD, M7SpD };
             TextBox[] ArenaText = { RankA, RankB, RankC, FenCD, FenUT };
             #endregion
             data = (File.ReadAllBytes(ofd.FileName));
@@ -859,7 +854,7 @@ namespace Custom_Quest_Editor
             data3[7] = buffer[1];
             data3[8] = buffer[2];
             data3[9] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToByte(Stars.SelectedIndex + 1));
+            buffer = BitConverter.GetBytes(Convert.ToByte(Stars.SelectedIndex));
             data3[10] = buffer[0];
             buffer = BitConverter.GetBytes(Convert.ToByte(Rank.SelectedIndex));
             data3[19] = buffer[0];
@@ -881,7 +876,6 @@ namespace Custom_Quest_Editor
             else data3[31] = 0;
             buffer = BitConverter.GetBytes(Convert.ToByte(Weather.SelectedIndex));
             data3[43] = buffer[0];
-            data3[47] = Convert.ToByte(MPMod.Text);
             buffer = BitConverter.GetBytes(Convert.ToInt32(Reward.Text));
             data3[51] = buffer[0];
             data3[52] = buffer[1];
@@ -1067,33 +1061,27 @@ namespace Custom_Quest_Editor
             data3[632] = buffer[1];
             data3[633] = buffer[2];
             data3[634] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu1.Text));
+            buffer = BitConverter.GetBytes(Convert.ToInt32(sMAt.Text));
             data3[635] = buffer[0];
             data3[636] = buffer[1];
             data3[637] = buffer[2];
             data3[638] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu2.Text));
+            buffer = BitConverter.GetBytes(Convert.ToInt32(sMDe.Text));
             data3[639] = buffer[0];
             data3[640] = buffer[1];
             data3[641] = buffer[2];
             data3[642] = buffer[3];
-            data3[643] = Convert.ToByte(sMu3.Text);
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu4.Text));
+            buffer = BitConverter.GetBytes(Convert.ToInt32(MPMod.Text));
             data3[644] = buffer[0];
             data3[645] = buffer[1];
             data3[646] = buffer[2];
             data3[647] = buffer[3];
-            buffer = BitConverter.GetBytes(Convert.ToInt32(sMu5.Text));
-            data3[648] = buffer[0];
-            data3[649] = buffer[1];
-            data3[650] = buffer[2];
-            data3[651] = buffer[3];
             #endregion
             #region Spawn, Map Icons, and Arena
             for (int i = 0; i < 5; i++)
                 data3[652 + 4 * i] = Convert.ToByte(MSSpw[i].SelectedIndex);
             for (int i = 0; i < SpawnText.Length; i++)
-                data3[676 + 4 * i] = Convert.ToByte(SpawnText[i].Text);
+                data3[672 + 4 * i] = Convert.ToByte(SpawnText[i].Text);
             for (int i = 0; i < MapIcons.Length; i++)
             {
                 buffer = BitConverter.GetBytes(Convert.ToInt32(MapIcons[i].SelectedIndex));
@@ -1172,6 +1160,20 @@ namespace Custom_Quest_Editor
                 File.WriteAllBytes(sfd.FileName, data4);
             }
         }
+        private void PlayerSpawnChanged(object sender, RoutedEventArgs e)
+        {
+            if (PSpawn.SelectedIndex == 0)
+                FSpawn.IsChecked = true;
+            else
+                FSpawn.IsChecked = false;
+        }
+        private void FixedSpawn(object sender, RoutedEventArgs e)
+        {
+            if (FSpawn.IsChecked == true)
+                PSpawn.SelectedIndex = 0;
+            else if (PSpawn.SelectedIndex == 0)
+                PSpawn.SelectedIndex = 1;
+        }
         private void MultiO_Checked(object sender, RoutedEventArgs e)
         {
             if (MultiO.IsChecked == true)
@@ -1179,7 +1181,6 @@ namespace Custom_Quest_Editor
             else if (MultiO.IsChecked == false)
                 MObj2.IsEnabled = false;
         }
-        
         private void MObjT1_Changed(object sender, RoutedEventArgs e)
         {
             MObjID1.Items.Clear();

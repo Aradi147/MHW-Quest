@@ -77,7 +77,7 @@
                                     <Label Grid.Row="1" Grid.Column="0" Content="Rank"/>
                                     <Label Grid.Row="1" Grid.Column="4" Content="Map"/>
                                     <Label Grid.Row="2" Grid.Column="0" Content="Player Spawn"/>
-                                    <CheckBox Grid.Row="2" Grid.Column="4" Content="Fixed Spawn" Name="FSpawn"/>
+                                    <CheckBox Grid.Row="2" Grid.Column="4" Content="Fixed Spawn" Name="FSpawn" Checked="FixedSpawn" Unchecked="FixedSpawn"/>
                                     <Label Grid.Row="3" Grid.Column="0" Content="Time Cycle"/>
                                     <Label Grid.Row="3" Grid.Column="4" Content="Weather Condition"/>
                                     <Label Grid.Row="4" Grid.Column="0" Content="Multiplayer Modifier"/>
@@ -96,7 +96,7 @@
                                     <CheckBox Grid.Row="10" Grid.Column="4" Content="Pre-Selected Gear" Name="PSGear"/>
                                     <ComboBox Grid.Row="1" Grid.Column="2" Padding="0,5" Margin="0,5" Name="Rank"/>
                                     <ComboBox Grid.Row="1" Grid.Column="6" Padding="0,5" Margin="0,5" Name="Map"/>
-                                    <ComboBox Grid.Row="2" Grid.Column="2" Padding="0,5" Margin="0,5" Name="PSpawn"/>
+                                    <ComboBox Grid.Row="2" Grid.Column="2" Padding="0,5" Margin="0,5" Name="PSpawn" SelectionChanged="PlayerSpawnChanged"/>
                                     <ComboBox Grid.Row="3" Grid.Column="2" Padding="0,5" Margin="0,5" Name="Time"/>
                                     <ComboBox Grid.Row="3" Grid.Column="6" Padding="0,5" Margin="0,5" Name="Weather"/>
                                     <TextBox MaxLength="2" PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Padding="0,5" Margin="0,5" Name="MPMod" />
@@ -577,18 +577,12 @@
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Content="Sobj ID"/>
                                     <Label Grid.Row="1" Content="Health"/>
-                                    <Label Grid.Row="2" Content="Unknown 1"/>
-                                    <Label Grid.Row="3" Content="Unknown 2"/>
-                                    <Label Grid.Row="4" Content="Unknown 3"/>
-                                    <Label Grid.Row="5" Content="Unknown 4"/>
-                                    <Label Grid.Row="6" Content="Unknown 5"/>
+                                    <Label Grid.Row="2" Content="Attack"/>
+                                    <Label Grid.Row="3" Content="KO/Status/Defense"/>
                                     <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="0" Name="sMsobj" Margin="0,5" Padding="0,5"/>
                                     <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="1" Name="sMHP" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="2" Name="sMu1" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="3" Name="sMu2" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="4" Name="sMu3" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="5" Name="sMu4" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="6" Name="sMu5" Margin="0,5" Padding="0,5"/>
+                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="2" Name="sMAt" Margin="0,5" Padding="0,5"/>
+                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="3" Name="sMDe" Margin="0,5" Padding="0,5"/>
                                 </Grid>
                             </TabItem>
                         </TabControl>
@@ -627,25 +621,28 @@
                                             <ColumnDefinition Width="50"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel>
-                                            <Label Content="Monster 7 Decoder" Padding="0,5" Margin="0,6"/>
+                                            <Label Content="Monster 6 Decider" Padding="0,5" Margin="0,6"/>
+                                            <Label Content="Monster 7 Decider" Padding="0,5" Margin="0,6"/>
                                             <Label Content="Monster 3 Spawn Chance" Padding="0,5" Margin="0,6"/>
                                             <Label Content="Monster 4 Spawn Chance" Padding="0,5" Margin="0,6"/>
                                             <Label Content="Monster 5 Spawn Chance" Padding="0,5" Margin="0,6"/>
                                             <Label Content="Monster 6 Spawn Chance" Padding="0,5" Margin="0,6"/>
                                             <Label Content="Monster 7 Spawn Chance" Padding="0,5" Margin="0,6"/>
-                                        </StackPanel>                              
+                                        </StackPanel>
                                         <StackPanel Grid.Column="2">
-                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M7SpD" Padding="0,5" Margin="0,5"/>
-                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M3SpC" Padding="0,5" Margin="0,5"/>
-                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M4SpC" Padding="0,5" Margin="0,5"/>
-                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M5SpC" Padding="0,5" Margin="0,5"/>
-                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M6SpC" Padding="0,5" Margin="0,5"/>
-                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M7SpC" Padding="0,5" Margin="0,5"/>
+                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M6SpD" Padding="0,5" Margin="0,5.2"/>
+                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M7SpD" Padding="0,5" Margin="0,5.2"/>
+                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M3SpC" Padding="0,5" Margin="0,5.2"/>
+                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M4SpC" Padding="0,5" Margin="0,5.2"/>
+                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M5SpC" Padding="0,5" Margin="0,5.2"/>
+                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M6SpC" Padding="0,5" Margin="0,5.2"/>
+                                            <TextBox PreviewTextInput="NumberValidationTextBox" Name="M7SpC" Padding="0,5" Margin="0,5.2"/>
                                         </StackPanel>
                                     </Grid>
                                 </GroupBox>
 
                             </Grid>
+                            <!--<TextBox Name="SpawnHelp" TextWrapping="Wrap" AcceptsReturn="True" IsEnabled="false" Text="If I can see this, I messed up." FontSize="14" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Padding="10,5" TextAlignment="Justify"/>-->
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Icons">
@@ -685,57 +682,57 @@
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
-                                        <Label Grid.Row="00" Grid.Column="0" Content="Map Icon 01"/>
-                                        <Label Grid.Row="00" Grid.Column="4" Content="Map Icon 02"/>
-                                        <Label Grid.Row="00" Grid.Column="8" Content="Map Icon 03"/>
-                                        <Label Grid.Row="01" Grid.Column="0" Content="Map Icon 04"/>
-                                        <Label Grid.Row="01" Grid.Column="4" Content="Map Icon 05"/>
-                                        <Label Grid.Row="01" Grid.Column="8" Content="Map Icon 06"/>
-                                        <Label Grid.Row="02" Grid.Column="0" Content="Map Icon 07"/>
-                                        <Label Grid.Row="02" Grid.Column="4" Content="Map Icon 08"/>
-                                        <Label Grid.Row="02" Grid.Column="8" Content="Map Icon 09"/>
-                                        <Label Grid.Row="03" Grid.Column="0" Content="Map Icon 10"/>
-                                        <Label Grid.Row="03" Grid.Column="4" Content="Map Icon 11"/>
-                                        <Label Grid.Row="03" Grid.Column="8" Content="Map Icon 12"/>
-                                        <Label Grid.Row="04" Grid.Column="0" Content="Map Icon 13"/>
-                                        <Label Grid.Row="04" Grid.Column="4" Content="Map Icon 14"/>
-                                        <Label Grid.Row="04" Grid.Column="8" Content="Map Icon 15"/>
-                                        <Label Grid.Row="05" Grid.Column="0" Content="Map Icon 16"/>
-                                        <Label Grid.Row="05" Grid.Column="4" Content="Map Icon 17"/>
-                                        <Label Grid.Row="05" Grid.Column="8" Content="Map Icon 18"/>
-                                        <Label Grid.Row="06" Grid.Column="0" Content="Map Icon 19"/>
-                                        <Label Grid.Row="06" Grid.Column="4" Content="Map Icon 20"/>
-                                        <Label Grid.Row="06" Grid.Column="8" Content="Map Icon 21"/>
-                                        <Label Grid.Row="07" Grid.Column="0" Content="Map Icon 22"/>
-                                        <Label Grid.Row="07" Grid.Column="4" Content="Map Icon 23"/>
-                                        <Label Grid.Row="07" Grid.Column="8" Content="Map Icon 24"/>
-                                        <Label Grid.Row="08" Grid.Column="0" Content="Map Icon 25"/>
-                                        <Label Grid.Row="08" Grid.Column="4" Content="Map Icon 26"/>
-                                        <Label Grid.Row="08" Grid.Column="8" Content="Map Icon 27"/>
-                                        <Label Grid.Row="09" Grid.Column="0" Content="Map Icon 28"/>
-                                        <Label Grid.Row="09" Grid.Column="4" Content="Map Icon 29"/>
-                                        <Label Grid.Row="09" Grid.Column="8" Content="Map Icon 30"/>
-                                        <Label Grid.Row="10" Grid.Column="0" Content="Map Icon 31"/>
-                                        <Label Grid.Row="10" Grid.Column="4" Content="Map Icon 32"/>
-                                        <Label Grid.Row="10" Grid.Column="8" Content="Map Icon 33"/>
-                                        <Label Grid.Row="11" Grid.Column="0" Content="Map Icon 34"/>
-                                        <Label Grid.Row="11" Grid.Column="4" Content="Map Icon 35"/>
-                                        <Label Grid.Row="11" Grid.Column="8" Content="Map Icon 36"/>
-                                        <Label Grid.Row="12" Grid.Column="0" Content="Map Icon 37"/>
-                                        <Label Grid.Row="12" Grid.Column="4" Content="Map Icon 38"/>
-                                        <Label Grid.Row="12" Grid.Column="8" Content="Map Icon 39"/>
-                                        <Label Grid.Row="13" Grid.Column="0" Content="Map Icon 40"/>
-                                        <Label Grid.Row="13" Grid.Column="4" Content="Map Icon 41"/>
-                                        <Label Grid.Row="13" Grid.Column="8" Content="Map Icon 42"/>
-                                        <Label Grid.Row="14" Grid.Column="0" Content="Map Icon 43"/>
-                                        <Label Grid.Row="14" Grid.Column="4" Content="Map Icon 44"/>
-                                        <Label Grid.Row="14" Grid.Column="8" Content="Map Icon 45"/>
-                                        <Label Grid.Row="15" Grid.Column="0" Content="Map Icon 46"/>
-                                        <Label Grid.Row="15" Grid.Column="4" Content="Map Icon 47"/>
-                                        <Label Grid.Row="15" Grid.Column="8" Content="Map Icon 48"/>
-                                        <Label Grid.Row="16" Grid.Column="0" Content="Map Icon 49"/>
-                                        <Label Grid.Row="16" Grid.Column="4" Content="Map Icon 50"/>
-                                        <Label Grid.Row="16" Grid.Column="8" Content="Map Icon 51"/>
+                                        <Label Grid.Row="00" Grid.Column="0" Content="Area 1 Icon Value 1"/>
+                                        <Label Grid.Row="00" Grid.Column="4" Content="Area 1 Icon Value 2"/>
+                                        <Label Grid.Row="00" Grid.Column="8" Content="Area 1 Icon Value 3"/>
+                                        <Label Grid.Row="01" Grid.Column="0" Content="Area 2 Icon Value 1"/>
+                                        <Label Grid.Row="01" Grid.Column="4" Content="Area 2 Icon Value 2"/>
+                                        <Label Grid.Row="01" Grid.Column="8" Content="Area 2 Icon Value 3"/>
+                                        <Label Grid.Row="02" Grid.Column="0" Content="Area 3 Icon Value 1"/>
+                                        <Label Grid.Row="02" Grid.Column="4" Content="Area 3 Icon Value 2"/>
+                                        <Label Grid.Row="02" Grid.Column="8" Content="Area 3 Icon Value 3"/>
+                                        <Label Grid.Row="03" Grid.Column="0" Content="Area 4 Icon Value 1"/>
+                                        <Label Grid.Row="03" Grid.Column="4" Content="Area 4 Icon Value 2"/>
+                                        <Label Grid.Row="03" Grid.Column="8" Content="Area 4 Icon Value 3"/>
+                                        <Label Grid.Row="04" Grid.Column="0" Content="Area 5 Icon Value 1"/>
+                                        <Label Grid.Row="04" Grid.Column="4" Content="Area 5 Icon Value 2"/>
+                                        <Label Grid.Row="04" Grid.Column="8" Content="Area 5 Icon Value 3"/>
+                                        <Label Grid.Row="05" Grid.Column="0" Content="Area 6 Icon Value 1"/>
+                                        <Label Grid.Row="05" Grid.Column="4" Content="Area 6 Icon Value 2"/>
+                                        <Label Grid.Row="05" Grid.Column="8" Content="Area 6 Icon Value 3"/>
+                                        <Label Grid.Row="06" Grid.Column="0" Content="Area 7 Icon Value 1"/>
+                                        <Label Grid.Row="06" Grid.Column="4" Content="Area 7 Icon Value 2"/>
+                                        <Label Grid.Row="06" Grid.Column="8" Content="Area 7 Icon Value 3"/>
+                                        <Label Grid.Row="07" Grid.Column="0" Content="Area 8 Icon Value 1"/>
+                                        <Label Grid.Row="07" Grid.Column="4" Content="Area 8 Icon Value 2"/>
+                                        <Label Grid.Row="07" Grid.Column="8" Content="Area 8 Icon Value 3"/>
+                                        <Label Grid.Row="08" Grid.Column="0" Content="Area 9 Icon Value 1"/>
+                                        <Label Grid.Row="08" Grid.Column="4" Content="Area 9 Icon Value 2"/>
+                                        <Label Grid.Row="08" Grid.Column="8" Content="Area 9 Icon Value 3"/>
+                                        <Label Grid.Row="09" Grid.Column="0" Content="Area 10 Icon Value 1"/>
+                                        <Label Grid.Row="09" Grid.Column="4" Content="Area 10 Icon Value 2"/>
+                                        <Label Grid.Row="09" Grid.Column="8" Content="Area 10 Icon Value 3"/>
+                                        <Label Grid.Row="10" Grid.Column="0" Content="Area 11 Icon Value 1"/>
+                                        <Label Grid.Row="10" Grid.Column="4" Content="Area 11 Icon Value 2"/>
+                                        <Label Grid.Row="10" Grid.Column="8" Content="Area 11 Icon Value 3"/>
+                                        <Label Grid.Row="11" Grid.Column="0" Content="Area 12 Icon Value 1"/>
+                                        <Label Grid.Row="11" Grid.Column="4" Content="Area 12 Icon Value 2"/>
+                                        <Label Grid.Row="11" Grid.Column="8" Content="Area 12 Icon Value 3"/>
+                                        <Label Grid.Row="12" Grid.Column="0" Content="Area 13 Icon Value 1"/>
+                                        <Label Grid.Row="12" Grid.Column="4" Content="Area 13 Icon Value 2"/>
+                                        <Label Grid.Row="12" Grid.Column="8" Content="Area 13 Icon Value 3"/>
+                                        <Label Grid.Row="13" Grid.Column="0" Content="Area 14 Icon Value 1"/>
+                                        <Label Grid.Row="13" Grid.Column="4" Content="Area 14 Icon Value 2"/>
+                                        <Label Grid.Row="13" Grid.Column="8" Content="Area 14 Icon Value 3"/>
+                                        <Label Grid.Row="14" Grid.Column="0" Content="Area 15 Icon Value 1"/>
+                                        <Label Grid.Row="14" Grid.Column="4" Content="Area 15 Icon Value 2"/>
+                                        <Label Grid.Row="14" Grid.Column="8" Content="Area 15 Icon Value 3"/>
+                                        <Label Grid.Row="15" Grid.Column="0" Content="Area 16 Icon Value 1"/>
+                                        <Label Grid.Row="15" Grid.Column="4" Content="Area 16 Icon Value 2"/>
+                                        <Label Grid.Row="15" Grid.Column="8" Content="Area 16 Icon Value 3"/>
+                                        <Label Grid.Row="16" Grid.Column="0" Content="Area 17 Icon Value 1"/>
+                                        <Label Grid.Row="16" Grid.Column="4" Content="Area 17 Icon Value 2"/>
+                                        <Label Grid.Row="16" Grid.Column="8" Content="Area 17 Icon Value 3"/>
                                         <ComboBox Grid.Row="00" Grid.Column="02" Name="MapIcon01" Padding="0,5" Margin="0,5"/>
                                         <ComboBox Grid.Row="00" Grid.Column="06" Name="MapIcon02" Padding="0,5" Margin="0,5"/>
                                         <ComboBox Grid.Row="00" Grid.Column="10" Name="MapIcon03" Padding="0,5" Margin="0,5"/>

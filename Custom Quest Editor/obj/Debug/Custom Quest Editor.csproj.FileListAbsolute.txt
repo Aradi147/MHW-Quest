@@ -1,6 +1,7 @@
 C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\bin\Debug\Custom Quest Editor.exe.config
 C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\bin\Debug\Custom Quest Editor.exe
 C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\bin\Debug\Custom Quest Editor.pdb
+C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor.csprojAssemblyReference.cache
 C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\MainWindow.g.cs
 C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\App.g.cs
 C:\Users\Ali Alaradi\source\repos\Custom Quest Editor\Custom Quest Editor\obj\Debug\Custom Quest Editor_MarkupCompile.cache
