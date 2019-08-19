@@ -273,6 +273,8 @@ namespace Custom_Quest_Editor
             {
                 MObjT1.Items.Add(ObjectiveList[i]);
                 MObjT2.Items.Add(ObjectiveList[i]);
+                SObjT1.Items.Add(ObjectiveList[i]);
+                SObjT2.Items.Add(ObjectiveList[i]);
             }
             #endregion
             #region Monsters, Spawn, and Map Icons
@@ -319,6 +321,7 @@ namespace Custom_Quest_Editor
                 SaveM.IsEnabled = true;
                 SaveAs.IsEnabled = true;
             }
+            else return;
             #region Defenitions
             ComboBox[] MID = { M1ID, M2ID, M3ID, M4ID, M5ID, M6ID, M7ID };
             TextBox[] MSobj = { M1sobjID, M2sobjID, M3sobjID, M4sobjID, M5sobjID, M6sobjID, M7sobjID };
@@ -364,11 +367,12 @@ namespace Custom_Quest_Editor
                     Map.SelectedIndex = i;
             PSpawn.SelectedIndex = data2[27];
             if (data2[31] == 0)
-                FSpawn.IsChecked = false;
-            else FSpawn.IsChecked = true;
+                FSpawn.IsChecked = true;
+            else FSpawn.IsChecked = false;
             Weather.SelectedIndex = data2[43];
             Reward.Text = BitConverter.ToUInt32(new byte[] { data2[51], data2[52], data2[53], data2[54] }, 0).ToString();
             Penalty.Text = BitConverter.ToUInt32(new byte[] { data2[55], data2[56], data2[57], data2[58] }, 0).ToString();
+            //SReward.Text = BitConverter.ToUInt32(new byte[] { data2[59], data2[60], data2[61], data2[62] }, 0).ToString();
             Timer.Text = BitConverter.ToUInt32(new byte[] { data2[63], data2[64], data2[65], data2[66] }, 0).ToString();
             for (int i = 0; i < 5; i++)
                 MonIcons[i].SelectedIndex = BitConverter.ToUInt16(new byte[] { data2[68 + 2 * i], data2[69 + 2 * i] }, 0);
@@ -392,6 +396,22 @@ namespace Custom_Quest_Editor
             if (data2[99] == 1)
                 MultiO.IsChecked = false;
             else MultiO.IsChecked = true;
+            for (int i = 0; i < ObjectiveIDs.Length; i++)
+                if (data2[100] == ObjectiveIDs[i])
+                    SObjT1.SelectedIndex = i;
+            if (data2[101] == 04)
+                SObj1MM.IsChecked = true;
+            else SObj1MM.IsChecked = false;
+            SObjID1.SelectedIndex = BitConverter.ToUInt16(new byte[] { data2[104], data2[105] }, 0);
+            SObjC1.Text = BitConverter.ToUInt16(new byte[] { data2[106], data2[107] }, 0).ToString();
+            for (int i = 0; i < ObjectiveIDs.Length; i++)
+                if (data2[108] == ObjectiveIDs[i])
+                    SObjT2.SelectedIndex = i;
+            if (data2[109] == 04)
+                SObj2MM.IsChecked = true;
+            else SObj2MM.IsChecked = false;
+            SObjID2.SelectedIndex = BitConverter.ToUInt16(new byte[] { data2[112], data2[113] }, 0);
+            SObjC2.Text = BitConverter.ToUInt16(new byte[] { data2[114], data2[115] }, 0).ToString();
             BGM.SelectedIndex = data2[120];
             for (int i = 0; i < QuestTypeIDs.Length; i++)
                 if (data2[128] == QuestTypeIDs[i])
@@ -417,6 +437,8 @@ namespace Custom_Quest_Editor
                 PSGear.IsChecked = true;
             }
             RRemID.Text = BitConverter.ToUInt32(new byte[] { data2[132], data2[133], data2[134], data2[135] }, 0).ToString();
+            S1RRemID.Text = BitConverter.ToUInt32(new byte[] { data2[136], data2[137], data2[138], data2[139] }, 0).ToString();
+            S2RRemID.Text = BitConverter.ToUInt32(new byte[] { data2[140], data2[141], data2[142], data2[143] }, 0).ToString();
             SRemID.Text = BitConverter.ToUInt32(new byte[] { data2[144], data2[145], data2[146], data2[147] }, 0).ToString();
             HRpoint.Text = BitConverter.ToUInt32(new byte[] { data2[160], data2[161], data2[162], data2[163] }, 0).ToString();
             #endregion
@@ -538,8 +560,8 @@ namespace Custom_Quest_Editor
             buffer = BitConverter.GetBytes(Convert.ToByte(PSpawn.SelectedIndex));
             data3[27] = buffer[0];
             if (FSpawn.IsChecked == true)
-                data3[31] = 1;
-            else data3[31] = 0;
+                data3[31] = 0;
+            else data3[31] = 1;
             buffer = BitConverter.GetBytes(Convert.ToByte(Weather.SelectedIndex));
             data3[43] = buffer[0];
             buffer = BitConverter.GetBytes(Convert.ToInt32(Reward.Text));
@@ -602,6 +624,40 @@ namespace Custom_Quest_Editor
             if (MultiO.IsChecked == true)
                 data3[99] = 2;
             else data3[99] = 1;
+            for (int i = 0; i < ObjectiveIDs.Length; i++)
+            {
+                if (SObjT1.SelectedIndex == i)
+                {
+                    buffer = BitConverter.GetBytes(ObjectiveIDs[i]);
+                    data3[100] = buffer[0];
+                }
+            }
+            if (SObj1MM.IsChecked == true)
+                data3[100] = 04;
+            else data3[100] = 0;
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjID1.SelectedIndex));
+            data3[104] = buffer[0];
+            data3[105] = buffer[1];
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjC1.Text));
+            data3[106] = buffer[0];
+            data3[107] = buffer[1];
+            for (int i = 0; i < ObjectiveIDs.Length; i++)
+            {
+                if (SObjT2.SelectedIndex == i)
+                {
+                    buffer = BitConverter.GetBytes(ObjectiveIDs[i]);
+                    data3[108] = buffer[0];
+                }
+            }
+            if (SObj2MM.IsChecked == true)
+                data3[109] = 04;
+            else data3[109] = 0;
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjID2.SelectedIndex));
+            data3[112] = buffer[0];
+            data3[113] = buffer[1];
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjC2.Text));
+            data3[114] = buffer[0];
+            data3[115] = buffer[1];
             buffer = BitConverter.GetBytes(Convert.ToByte(BGM.SelectedIndex));
             data3[120] = buffer[0];
             for (int i = 0; i < QuestTypeIDs.Length; i++)
@@ -618,6 +674,16 @@ namespace Custom_Quest_Editor
             data3[133] = buffer[1];
             data3[134] = buffer[2];
             data3[135] = buffer[3];
+            buffer = BitConverter.GetBytes(Convert.ToInt32(S1RRemID.Text));
+            data3[136] = buffer[0];
+            data3[137] = buffer[1];
+            data3[138] = buffer[2];
+            data3[139] = buffer[3];
+            buffer = BitConverter.GetBytes(Convert.ToInt32(S2RRemID.Text));
+            data3[140] = buffer[0];
+            data3[141] = buffer[1];
+            data3[142] = buffer[2];
+            data3[143] = buffer[3];
             buffer = BitConverter.GetBytes(Convert.ToInt32(SRemID.Text));
             data3[144] = buffer[0];
             data3[145] = buffer[1];
@@ -758,13 +824,13 @@ namespace Custom_Quest_Editor
             }
             for (int i = 0; i < 5; i++)
             {
-                if (SmlMonIcons[i].SelectedIndex == 0)
+                if (SmlMonIcons[i].SelectedIndex == 127)
                 {
                     data3[908 + 4 * i] = 0;
                     data3[928 + 4 * i] = 0;
                 }
                 else
-                    data3[908 + 4 * i] = Convert.ToByte(SmlMonIcons[i].SelectedIndex);
+                    data3[928 + 4 * i] = Convert.ToByte(SmlMonIcons[i].SelectedIndex);
             }
             buffer = BitConverter.GetBytes(Convert.ToInt32(SetID.Text));
             data3[948] = buffer[0];
@@ -872,8 +938,8 @@ namespace Custom_Quest_Editor
             buffer = BitConverter.GetBytes(Convert.ToByte(PSpawn.SelectedIndex));
             data3[27] = buffer[0];
             if (FSpawn.IsChecked == true)
-                data3[31] = 1;
-            else data3[31] = 0;
+                data3[31] = 0;
+            else data3[31] = 1;
             buffer = BitConverter.GetBytes(Convert.ToByte(Weather.SelectedIndex));
             data3[43] = buffer[0];
             buffer = BitConverter.GetBytes(Convert.ToInt32(Reward.Text));
@@ -936,6 +1002,40 @@ namespace Custom_Quest_Editor
             if (MultiO.IsChecked == true)
                 data3[99] = 2;
             else data3[99] = 1;
+            for (int i = 0; i < ObjectiveIDs.Length; i++)
+            {
+                if (SObjT1.SelectedIndex == i)
+                {
+                    buffer = BitConverter.GetBytes(ObjectiveIDs[i]);
+                    data3[100] = buffer[0];
+                }
+            }
+            if (SObj1MM.IsChecked == true)
+                data3[100] = 04;
+            else data3[100] = 0;
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjID1.SelectedIndex));
+            data3[104] = buffer[0];
+            data3[105] = buffer[1];
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjC1.Text));
+            data3[106] = buffer[0];
+            data3[107] = buffer[1];
+            for (int i = 0; i < ObjectiveIDs.Length; i++)
+            {
+                if (SObjT2.SelectedIndex == i)
+                {
+                    buffer = BitConverter.GetBytes(ObjectiveIDs[i]);
+                    data3[108] = buffer[0];
+                }
+            }
+            if (SObj2MM.IsChecked == true)
+                data3[109] = 04;
+            else data3[109] = 0;
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjID2.SelectedIndex));
+            data3[112] = buffer[0];
+            data3[113] = buffer[1];
+            buffer = BitConverter.GetBytes(Convert.ToUInt16(SObjC2.Text));
+            data3[114] = buffer[0];
+            data3[115] = buffer[1];
             buffer = BitConverter.GetBytes(Convert.ToByte(BGM.SelectedIndex));
             data3[120] = buffer[0];
             for (int i = 0; i < QuestTypeIDs.Length; i++)
@@ -952,6 +1052,16 @@ namespace Custom_Quest_Editor
             data3[133] = buffer[1];
             data3[134] = buffer[2];
             data3[135] = buffer[3];
+            buffer = BitConverter.GetBytes(Convert.ToInt32(S1RRemID.Text));
+            data3[136] = buffer[0];
+            data3[137] = buffer[1];
+            data3[138] = buffer[2];
+            data3[139] = buffer[3];
+            buffer = BitConverter.GetBytes(Convert.ToInt32(S2RRemID.Text));
+            data3[140] = buffer[0];
+            data3[141] = buffer[1];
+            data3[142] = buffer[2];
+            data3[143] = buffer[3];
             buffer = BitConverter.GetBytes(Convert.ToInt32(SRemID.Text));
             data3[144] = buffer[0];
             data3[145] = buffer[1];
@@ -1098,7 +1208,7 @@ namespace Custom_Quest_Editor
                     data3[928 + 4 * i] = 0;
                 }
                 else
-                    data3[908 + 4 * i] = Convert.ToByte(SmlMonIcons[i].SelectedIndex);
+                    data3[928 + 4 * i] = Convert.ToByte(SmlMonIcons[i].SelectedIndex);
             }
             buffer = BitConverter.GetBytes(Convert.ToInt32(SetID.Text));
             data3[948] = buffer[0];
@@ -1162,17 +1272,17 @@ namespace Custom_Quest_Editor
         }
         private void PlayerSpawnChanged(object sender, RoutedEventArgs e)
         {
-            if (PSpawn.SelectedIndex == 0)
-                FSpawn.IsChecked = true;
-            else
-                FSpawn.IsChecked = false;
+           //if (PSpawn.SelectedIndex == 0)
+           //    FSpawn.IsChecked = true;
+           //else
+           //    FSpawn.IsChecked = false;
         }
         private void FixedSpawn(object sender, RoutedEventArgs e)
         {
-            if (FSpawn.IsChecked == true)
-                PSpawn.SelectedIndex = 0;
-            else if (PSpawn.SelectedIndex == 0)
-                PSpawn.SelectedIndex = 1;
+           // if (FSpawn.IsChecked == true)
+           //     PSpawn.SelectedIndex = 0;
+           // else if (PSpawn.SelectedIndex == 0)
+           //     PSpawn.SelectedIndex = 1;
         }
         private void MultiO_Checked(object sender, RoutedEventArgs e)
         {

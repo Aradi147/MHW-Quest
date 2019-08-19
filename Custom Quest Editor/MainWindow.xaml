@@ -91,6 +91,8 @@
                                     <Label Grid.Row="8" Grid.Column="0" Content="Reward rem ID"/>
                                     <Label Grid.Row="9" Grid.Column="0" Content="Supply rem ID"/>
                                     <Label Grid.Row="10" Grid.Column="0" Content="Number of Players"/>
+                                    <Label Grid.Row="11" Grid.Column="0" Content="Sub1 Reward rem ID"/>
+                                    <Label Grid.Row="11" Grid.Column="4" Content="Sub2 Reward rem ID"/>
                                     <CheckBox Grid.Row="8" Grid.Column="4" Content="Map Toggle" Name="MapToggle"/>
                                     <CheckBox Grid.Row="9" Grid.Column="4" Content="Arch-Tempered Quest" Name="ATFlag"/>
                                     <CheckBox Grid.Row="10" Grid.Column="4" Content="Pre-Selected Gear" Name="PSGear"/>
@@ -109,6 +111,8 @@
                                     <TextBox MaxLength="10" PreviewTextInput="NumberValidationTextBox" Grid.Row="7" Grid.Column="6" Padding="0,5" Margin="0,5" Name="HRpoint"/>
                                     <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="8" Grid.Column="2" Padding="0,5" Margin="0,5" Name="RRemID"/>
                                     <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="9" Grid.Column="2" Padding="0,5" Margin="0,5" Name="SRemID"/>
+                                    <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="2" Padding="0,5" Margin="0,5" Name="S1RRemID"/>
+                                    <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="6" Padding="0,5" Margin="0,5" Name="S2RRemID"/>
                                     <ComboBox Grid.Row="10" Grid.Column="2" Padding="0,5" Margin="0,5" Name="NPlayers"/>
                                 </Grid>
                                 <GroupBox Header="Icons">
@@ -187,6 +191,59 @@
                                         <ComboBox Grid.Column="2" Name="MObjT2" SelectionChanged="MObjT2_Changed"/>
                                         <ComboBox Grid.Row="2" Grid.Column="2" Name="MObjID2"/>
                                         <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Name="MObjC2"/>
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <GroupBox Header="Sub Objective 1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="010"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Content="Objective Type:"/>
+                                        <Label Grid.Row="2" Content="Objective ID:"/>
+                                        <Label Grid.Row="4" Content="Amount"/>
+                                        <CheckBox Grid.Row="1" Content="Multi-Monster" Name="SObj1MM"/>
+                                        <ComboBox Grid.Column="2" Name="SObjT1" SelectionChanged="MObjT1_Changed"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="2" Name="SObjID1"/>
+                                        <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Name="SObjC1"/>
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Grid.Column="2" Header="Sub Objective 2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="010"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Content="Objective Type:"/>
+                                        <Label Grid.Row="2" Content="Objective ID:"/>
+                                        <Label Grid.Row="4" Content="Amount"/>
+                                        <CheckBox Grid.Row="1" Content="Multi-Monster" Name="SObj2MM"/>
+                                        <ComboBox Grid.Column="2" Name="SObjT2" SelectionChanged="MObjT2_Changed"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="2" Name="SObjID2"/>
+                                        <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Name="SObjC2"/>
                                     </Grid>
                                 </GroupBox>
                             </Grid>
