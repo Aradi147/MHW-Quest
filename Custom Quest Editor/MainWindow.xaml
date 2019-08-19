@@ -218,7 +218,7 @@
                                         <Label Grid.Row="2" Content="Objective ID:"/>
                                         <Label Grid.Row="4" Content="Amount"/>
                                         <CheckBox Grid.Row="1" Content="Multi-Monster" Name="SObj1MM"/>
-                                        <ComboBox Grid.Column="2" Name="SObjT1" SelectionChanged="MObjT1_Changed"/>
+                                        <ComboBox Grid.Column="2" Name="SObjT1" SelectionChanged="SObjT1_Changed"/>
                                         <ComboBox Grid.Row="2" Grid.Column="2" Name="SObjID1"/>
                                         <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Name="SObjC1"/>
                                     </Grid>
@@ -241,7 +241,7 @@
                                         <Label Grid.Row="2" Content="Objective ID:"/>
                                         <Label Grid.Row="4" Content="Amount"/>
                                         <CheckBox Grid.Row="1" Content="Multi-Monster" Name="SObj2MM"/>
-                                        <ComboBox Grid.Column="2" Name="SObjT2" SelectionChanged="MObjT2_Changed"/>
+                                        <ComboBox Grid.Column="2" Name="SObjT2" SelectionChanged="SObjT2_Changed"/>
                                         <ComboBox Grid.Row="2" Grid.Column="2" Name="SObjID2"/>
                                         <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Name="SObjC2"/>
                                     </Grid>

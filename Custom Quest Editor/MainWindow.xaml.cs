@@ -303,7 +303,7 @@ namespace Custom_Quest_Editor
                     MSSpw[i].Items.Add(SeqSpawnRules[j]);
             for (int i = 0; i < SmlMonIcons.Length; i++)
             {
-                SmlMonIcons[i].Items.Add("None");
+                //SmlMonIcons[i].Items.Add("None");
                 for (int j = 0; j < IconList.Length; j++)
                     SmlMonIcons[i].Items.Add(IconList[j]);
             }
@@ -482,8 +482,8 @@ namespace Custom_Quest_Editor
             for (int i=0;i<5;i++)
             {
                 if (data2[908 + 4 * i] == 0)
-                    SmlMonIcons[i].SelectedIndex = 0;
-                else SmlMonIcons[i].SelectedIndex = data2[928 + 4 * i]+1;
+                    SmlMonIcons[i].SelectedIndex = 127;
+                else SmlMonIcons[i].SelectedIndex = data2[928 + 4 * i];
             }
             SetID.Text= BitConverter.ToInt32(new byte[] { data2[948], data2[949], data2[950], data2[951] }, 0).ToString();
             RV = BitConverter.ToInt32(new byte[] { data2[952], data2[952], data2[954], data2[955] }, 0);
@@ -1202,7 +1202,7 @@ namespace Custom_Quest_Editor
             }
             for (int i = 0; i < 5; i++)
             {
-                if (SmlMonIcons[i].SelectedIndex == 0)
+                if (SmlMonIcons[i].SelectedIndex == 127)
                 {
                     data3[908 + 4 * i] = 0;
                     data3[928 + 4 * i] = 0;
@@ -1313,6 +1313,29 @@ namespace Custom_Quest_Editor
                 for (int i = 1; i < MonsterNames.Length; i++)
                     MObjID2.Items.Add(MonsterNames[i]);
             MObjID2.SelectedIndex = 0;
+        }
+        private void SObjT1_Changed(object sender, RoutedEventArgs e)
+        {
+            SObjID1.Items.Clear();
+            if (SObjT1.SelectedIndex == 2)
+                for (int i = 0; i < Items.Length; i++)
+                    SObjID1.Items.Add(Items[i]);
+            else
+                for (int i = 1; i < MonsterNames.Length; i++)
+                    SObjID1.Items.Add(MonsterNames[i]);
+            SObjID1.SelectedIndex = 0;
+        }
+        private void SObjT2_Changed(object sender, RoutedEventArgs e)
+        {
+
+            SObjID2.Items.Clear();
+            if (MObjT2.SelectedIndex == 2)
+                for (int i = 0; i < Items.Length; i++)
+                    SObjID2.Items.Add(Items[i]);
+            else
+                for (int i = 1; i < MonsterNames.Length; i++)
+                    SObjID2.Items.Add(MonsterNames[i]);
+            SObjID2.SelectedIndex = 0;
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
