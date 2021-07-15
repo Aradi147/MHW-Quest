@@ -34,6 +34,9 @@
                     <MenuItem Header="Save As" Name="SaveAs" IsEnabled="False" Click="SaveAs_Click"/>
                     <MenuItem Header="Exit" Click="Exit_Click"/>
                 </MenuItem>
+                <MenuItem Header="Testing">
+                    <MenuItem Header="Enable Editing Unknowns" IsCheckable="True" Checked="UnknownsChecked" Unchecked="UnkownsUnchecked"/>
+                </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Header="About" Click="About_Click"/>
                     <MenuItem Header="Contact" Click="Contact_Click"/>
@@ -73,7 +76,7 @@
                                     <Label Content="Quest ID"/>
                                     <TextBox PreviewTextInput="NumberValidationTextBox" MaxLength="6" Grid.Column="2" Name="QID" Padding="0,5" Margin="0,5"/>
                                     <Label Grid.Column="4" Content="Stars"/>
-                                    <ComboBox Grid.Column="6" Name="Stars" Padding="0,5" Margin="0,5"/>
+                                    <ComboBox Grid.Column="6" Name="Stars" Padding="0,5" Margin="0,5" SelectionChanged="RankSelectionChanged"/>
                                     <Label Grid.Row="1" Grid.Column="0" Content="Rank"/>
                                     <Label Grid.Row="1" Grid.Column="4" Content="Map"/>
                                     <Label Grid.Row="2" Grid.Column="0" Content="Player Spawn"/>
@@ -93,27 +96,29 @@
                                     <Label Grid.Row="10" Grid.Column="0" Content="Number of Players"/>
                                     <Label Grid.Row="11" Grid.Column="0" Content="Sub1 Reward rem ID"/>
                                     <Label Grid.Row="11" Grid.Column="4" Content="Sub2 Reward rem ID"/>
+                                    <Label Grid.Row="12" Grid.Column="0" Content="Quest Clear Music"/>
                                     <CheckBox Grid.Row="8" Grid.Column="4" Content="Map Toggle" Name="MapToggle"/>
                                     <CheckBox Grid.Row="9" Grid.Column="4" Content="Arch-Tempered Quest" Name="ATFlag"/>
                                     <CheckBox Grid.Row="10" Grid.Column="4" Content="Pre-Selected Gear" Name="PSGear"/>
-                                    <ComboBox Grid.Row="1" Grid.Column="2" Padding="0,5" Margin="0,5" Name="Rank"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="2" Padding="0,5" Margin="0,5" Name="Rank" SelectionChanged="RankSelectionChanged"/>
                                     <ComboBox Grid.Row="1" Grid.Column="6" Padding="0,5" Margin="0,5" Name="Map"/>
                                     <ComboBox Grid.Row="2" Grid.Column="2" Padding="0,5" Margin="0,5" Name="PSpawn" SelectionChanged="PlayerSpawnChanged"/>
                                     <ComboBox Grid.Row="3" Grid.Column="2" Padding="0,5" Margin="0,5" Name="Time"/>
                                     <ComboBox Grid.Row="3" Grid.Column="6" Padding="0,5" Margin="0,5" Name="Weather"/>
-                                    <TextBox MaxLength="2" PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Padding="0,5" Margin="0,5" Name="MPMod" />
-                                    <ComboBox Grid.Row="6" Grid.Column="2" Padding="0,5" Margin="0,5" Name="HRReq"/>
+                                    <TextBox MaxLength="3" PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="2" Padding="0,5" Margin="0,5" Name="MPMod" />
+                                    <ComboBox Grid.Row="6" Grid.Column="2" Padding="0,5" Margin="0,5" Name="HRReq" SelectionChanged="RankSelectionChanged"/>
                                     <ComboBox Grid.Row="6" Grid.Column="6" Padding="0,5" Margin="0,5" Name="BGM"/>
                                     <ComboBox Grid.Row="7" Grid.Column="2" Padding="0,5" Margin="0,5" Name="QType"/>
                                     <TextBox MaxLength="10" PreviewTextInput="NumberValidationTextBox" Grid.Row="4" Grid.Column="6" Padding="0,5" Margin="0,5" Name="Timer"/>
                                     <TextBox MaxLength="10" PreviewTextInput="NumberValidationTextBox" Grid.Row="5" Grid.Column="2" Padding="0,5" Margin="0,5" Name="Reward"/>
                                     <TextBox MaxLength="10" PreviewTextInput="NumberValidationTextBox" Grid.Row="5" Grid.Column="6" Padding="0,5" Margin="0,5" Name="Penalty"/>
                                     <TextBox MaxLength="10" PreviewTextInput="NumberValidationTextBox" Grid.Row="7" Grid.Column="6" Padding="0,5" Margin="0,5" Name="HRpoint"/>
-                                    <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="8" Grid.Column="2" Padding="0,5" Margin="0,5" Name="RRemID"/>
-                                    <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="9" Grid.Column="2" Padding="0,5" Margin="0,5" Name="SRemID"/>
-                                    <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="2" Padding="0,5" Margin="0,5" Name="S1RRemID"/>
-                                    <TextBox MaxLength="5" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="6" Padding="0,5" Margin="0,5" Name="S2RRemID"/>
+                                    <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Grid.Row="8" Grid.Column="2" Padding="0,5" Margin="0,5" Name="RRemID"/>
+                                    <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Grid.Row="9" Grid.Column="2" Padding="0,5" Margin="0,5" Name="SRemID"/>
+                                    <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="2" Padding="0,5" Margin="0,5" Name="S1RRemID"/>
+                                    <TextBox MaxLength="9" PreviewTextInput="NumberValidationTextBox" Grid.Row="11" Grid.Column="6" Padding="0,5" Margin="0,5" Name="S2RRemID"/>
                                     <ComboBox Grid.Row="10" Grid.Column="2" Padding="0,5" Margin="0,5" Name="NPlayers"/>
+                                    <ComboBox Grid.Row="12" Grid.Column="2" Padding="0,5" Margin="0,5" Name="QCMusic"/>
                                 </Grid>
                                 <GroupBox Header="Icons">
                                 <Grid>
@@ -637,9 +642,9 @@
                                     <Label Grid.Row="2" Content="Attack"/>
                                     <Label Grid.Row="3" Content="KO/Status/Defense"/>
                                     <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="0" Name="sMsobj" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="1" Name="sMHP" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="2" Name="sMAt" Margin="0,5" Padding="0,5"/>
-                                    <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="3" Name="sMDe" Margin="0,5" Padding="0,5"/>
+                                    <ComboBox Grid.Column="2" Grid.Row="1" Name="sMHP" Margin="0,5" Padding="0,5"/>
+                                    <ComboBox Grid.Column="2" Grid.Row="2" Name="sMAt" Margin="0,5" Padding="0,5"/>
+                                    <ComboBox Grid.Column="2" Grid.Row="3" Name="sMDe" Margin="0,5" Padding="0,5"/>
                                 </Grid>
                             </TabItem>
                         </TabControl>
@@ -902,6 +907,97 @@
                             <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="5" Name="FenCD"  Padding="0,5" Margin="0,5"/>
                             <TextBox PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="6" Name="FenUT"  Padding="0,5" Margin="0,5"/>
                         </Grid>
+                    </TabItem>
+                    <TabItem Name="UnkTab" IsEnabled="False" Header="Unknown">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="010"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="00" Grid.Column="0" Content="Unknown Uint32 00"/>
+                                <Label Grid.Row="00" Grid.Column="4" Content="Unknown Uint32 01"/>
+                                <Label Grid.Row="00" Grid.Column="8" Content="Unknown Uint32 02"/>
+                                <Label Grid.Row="01" Grid.Column="0" Content="Unknown Uint32 03"/>
+                                <Label Grid.Row="01" Grid.Column="4" Content="Unknown Uint32 04"/>
+                                <Label Grid.Row="01" Grid.Column="8" Content="Unknown Uint32 05"/>
+                                <Label Grid.Row="02" Grid.Column="0" Content="Unknown Uint32 06"/>
+                                <Label Grid.Row="02" Grid.Column="4" Content="Unknown Uint32 07"/>
+                                <Label Grid.Row="02" Grid.Column="8" Content="Unknown Uint32 08"/>
+                                <Label Grid.Row="03" Grid.Column="0" Content="Unknown Uint32 09"/>
+                                <Label Grid.Row="03" Grid.Column="4" Content="Unknown Uint32 10"/>
+                                <Label Grid.Row="03" Grid.Column="8" Content="Unknown Uint32 11"/>
+                                <Label Grid.Row="04" Grid.Column="0" Content="Unknown Uint32 12"/>
+                                <Label Grid.Row="04" Grid.Column="4" Content="Unknown Uint32 13"/>
+                                <Label Grid.Row="04" Grid.Column="8" Content="Unknown Uint32 14"/>
+                                <Label Grid.Row="05" Grid.Column="0" Content="Unknown Uint32 15"/>
+                                <Label Grid.Row="05" Grid.Column="4" Content="Unknown Uint32 16"/>
+                                <Label Grid.Row="05" Grid.Column="8" Content="Unknown Uint32 17"/>
+                                <Label Grid.Row="06" Grid.Column="0" Content="Unknown Uint32 18"/>
+                                <Label Grid.Row="06" Grid.Column="4" Content="Unknown Uint32 19"/>
+                                <Label Grid.Row="06" Grid.Column="8" Content="Unknown Uint32 20"/>
+                                <Label Grid.Row="07" Grid.Column="0" Content="Unknown Uint32 21"/>
+                                <Label Grid.Row="07" Grid.Column="4" Content="Unknown byte 00"/>
+                                <Label Grid.Row="07" Grid.Column="8" Content="Unknown byte 01"/>
+                                <Label Grid.Row="08" Grid.Column="2" Content="Unknown byte 02"/>
+                                <Label Grid.Row="08" Grid.Column="6" Content="Unknown byte 03"/>
+                                <TextBox Grid.Row="00" Grid.Column="02" Name="UnknownValue01" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="00" Grid.Column="06" Name="UnknownValue02" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="00" Grid.Column="10" Name="UnknownValue03" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="01" Grid.Column="02" Name="UnknownValue04" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="01" Grid.Column="06" Name="UnknownValue05" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="01" Grid.Column="10" Name="UnknownValue06" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="02" Grid.Column="02" Name="UnknownValue07" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="02" Grid.Column="06" Name="UnknownValue08" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="02" Grid.Column="10" Name="UnknownValue09" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="03" Grid.Column="02" Name="UnknownValue10" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="03" Grid.Column="06" Name="UnknownValue11" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="03" Grid.Column="10" Name="UnknownValue12" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="04" Grid.Column="02" Name="UnknownValue13" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="04" Grid.Column="06" Name="UnknownValue14" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="04" Grid.Column="10" Name="UnknownValue15" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="05" Grid.Column="02" Name="UnknownValue16" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="05" Grid.Column="06" Name="UnknownValue17" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="05" Grid.Column="10" Name="UnknownValue18" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="06" Grid.Column="02" Name="UnknownValue19" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="06" Grid.Column="06" Name="UnknownValue20" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="06" Grid.Column="10" Name="UnknownValue21" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="07" Grid.Column="02" Name="UnknownValue22" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="10" Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="07" Grid.Column="06" Name="UnknownValue23" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="3"  Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="07" Grid.Column="10" Name="UnknownValue24" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="3"  Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="08" Grid.Column="04" Name="UnknownValue25" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="3"  Padding="0,5" Margin="0,5"/>
+                                <TextBox Grid.Row="08" Grid.Column="08" Name="UnknownValue26" PreviewTextInput="NumberValidationTextBox" LostFocus="MaxValueInspection" MaxLength="3"  Padding="0,5" Margin="0,5"/>
+                            </Grid>
+                        </StackPanel>
+                        
                     </TabItem>
                 </TabControl>
             </Border>
